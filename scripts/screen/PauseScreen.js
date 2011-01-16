@@ -1,4 +1,4 @@
-var GameScreen;
+var PauseScreen;
 var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
   for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
   function ctor() { this.constructor = child; }
@@ -7,20 +7,19 @@ var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, par
   child.__super__ = parent.prototype;
   return child;
 };
-GameScreen = (function() {
-  __extends(GameScreen, Screen);
-  GameScreen.prototype.tickers = 0;
-  function GameScreen() {
-    this.level = new Level(this);
+PauseScreen = (function() {
+  __extends(PauseScreen, Screen);
+  function PauseScreen(parent) {
+    this.parent = parent;
   }
-  GameScreen.prototype.render = function(ctx) {
-    ctx.fillStyle = "rgb(0,0,0)";
+  PauseScreen.prototype.render = function(ctx) {
+    ctx.fillStyle = "rgb(250,250,250)";
     return ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   };
-  GameScreen.prototype.tick = function(input) {
+  PauseScreen.prototype.tick = function(input) {
     if (input.buttons[input.ESCAPE] && !input.oldButtons[input.ESCAPE]) {
-      return this.setScreen(new PauseScreen(this));
+      return this.setScreen(this.parent);
     }
   };
-  return GameScreen;
+  return PauseScreen;
 })();

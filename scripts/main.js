@@ -6,11 +6,12 @@
 */var main;
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 main = {
+  rate: 20,
   init: function() {
     console.log("game init");
     this.ctx = $("#screen").dom[0].getContext("2d");
-    this.input = new Input;
     this.bindKeys();
+    this.input = new Input;
     this.setScreen(new TitleScreen);
     this.start();
     return this.run();
@@ -30,7 +31,7 @@ main = {
     this.screen.render(this.ctx);
     return _.delay((function() {
       return main.run();
-    }), 1000);
+    }), this.rate);
   },
   setScreen: function(screen) {
     if (screen != null) {

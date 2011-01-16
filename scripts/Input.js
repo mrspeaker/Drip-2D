@@ -7,8 +7,22 @@ Input = (function() {
   Input.prototype.FIRE = 4;
   Input.prototype.ROTATE = 5;
   Input.prototype.ESCAPE = 6;
-  Input.prototype.buttons = [false, false, false, false, false, false];
-  Input.prototype.oldButtons = [false, false, false, false, false, false];
+  Input.prototype.buttons = (function() {
+    var _i, _results;
+    _results = [];
+    for (_i = 0; _i <= 6; _i++) {
+      _results.push(false);
+    }
+    return _results;
+  })();
+  Input.prototype.oldButtons = (function() {
+    var _i, _results;
+    _results = [];
+    for (_i = 0; _i <= 6; _i++) {
+      _results.push(false);
+    }
+    return _results;
+  })();
   function Input() {
     console.debug("new Input");
   }
@@ -47,7 +61,14 @@ Input = (function() {
     return this.oldButtons = _.clone(this.buttons);
   };
   Input.prototype.releaseAllKeys = function() {
-    return this.buttons = [false, false, false, false, false, false];
+    return this.buttons = (function() {
+      var _i, _ref, _results;
+      _results = [];
+      for (_i = 0, _ref = this.buttons.length; (0 <= _ref ? _i <= _ref : _i >= _ref); (0 <= _ref ? _i += 1 : _i -= 1)) {
+        _results.push(false);
+      }
+      return _results;
+    }).call(this);
   };
   return Input;
 })();

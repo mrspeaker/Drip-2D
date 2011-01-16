@@ -13,7 +13,7 @@ TitleScreen = (function() {
   }
   __extends(TitleScreen, Screen);
   TitleScreen.prototype.time = 0;
-  TitleScreen.prototype.minLength = 3;
+  TitleScreen.prototype.minLength = 50;
   TitleScreen.prototype.render = function(ctx) {
     ctx.fillStyle = "rgb(" + (this.rnd()) + "," + (this.rnd()) + "," + (this.rnd()) + ")";
     return ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);

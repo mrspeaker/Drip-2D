@@ -7,8 +7,8 @@ class Input
     ROTATE: 5
     ESCAPE: 6
     
-    buttons: [false,false,false,false,false,false]
-    oldButtons: [false,false,false,false,false,false]
+    buttons: (false for [0..6])
+    oldButtons: (false for [0..6])
 
     constructor: () ->
         console.debug "new Input"
@@ -25,5 +25,5 @@ class Input
             else button = -1
         if button > 0 then @buttons[button] = blnDown
         
-    tick: -> @oldButtons = _.clone(@buttons)
-    releaseAllKeys: -> @buttons = [false,false,false,false,false,false]
+    tick: -> @oldButtons = _.clone @buttons
+    releaseAllKeys: -> @buttons = (false for [0..@buttons.length])

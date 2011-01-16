@@ -1,6 +1,6 @@
 class TitleScreen extends Screen
     time: 0
-    minLength: 3
+    minLength: 50
 
     render: (ctx) ->
         ctx.fillStyle = "rgb(#{@rnd()},#{@rnd()},#{@rnd()})"
@@ -9,9 +9,8 @@ class TitleScreen extends Screen
     rnd: -> ~~(Math.random() * 255)
     tick: (input) ->
         if ++@time < @minLength then return
+
         if input.buttons[input.FIRE] and !input.oldButtons[input.FIRE]
             console.log "selected start from TitleScreen"
             @setScreen new GameScreen
             input.releaseAllKeys()
-            
-            

@@ -1,8 +1,6 @@
 class Screen
     init: (@game) -> console.log "new Screen (base)"
-    setScreen: (screen) ->
-        console.log "called", @game
-        @game.setScreen screen
+    setScreen: (screen) -> @game.setScreen screen
     removed: ->
-    render: (context) ->
+    render: (ctx) ->
     tick: (input) ->

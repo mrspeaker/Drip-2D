@@ -5,13 +5,13 @@
     Code structure and bits of code liberally borrowed from MetaGun.
 ###
 main =
+    rate: 20
     init: -> 
         console.log "game init"
         @ctx = $("#screen").dom[0].getContext("2d");
 
-        @input = new Input
         @bindKeys()
-
+        @input = new Input
         @setScreen new TitleScreen
 
         @start()
@@ -21,10 +21,10 @@ main =
     start: -> @running = true
     run: ->
         if not @running then return
-        @screen.tick(@input)
+        @screen.tick @input
         @input.tick()
         @screen.render @ctx
-        _.delay (-> main.run()), 1000
+        _.delay (-> main.run()), @rate
 
     setScreen: (screen) ->
         screen?.removed()

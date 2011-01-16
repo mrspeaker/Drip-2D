@@ -6,11 +6,10 @@ Screen = (function() {
     return console.log("new Screen (base)");
   };
   Screen.prototype.setScreen = function(screen) {
-    console.log("called", this.game);
     return this.game.setScreen(screen);
   };
   Screen.prototype.removed = function() {};
-  Screen.prototype.render = function(context) {};
+  Screen.prototype.render = function(ctx) {};
   Screen.prototype.tick = function(input) {};
   return Screen;
 })();
