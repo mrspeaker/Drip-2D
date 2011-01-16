@@ -8,19 +8,28 @@ var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, par
   return child;
 };
 TitleScreen = (function() {
-  var time;
   function TitleScreen() {
     TitleScreen.__super__.constructor.apply(this, arguments);
   }
   __extends(TitleScreen, Screen);
-  time = 0;
-  TitleScreen.prototype.render = function(context) {
-    context.fillStyle = "rgb(" + this.rnd() + "," + this.rnd() + "," + this.rnd() + ")";
-    return context.fillRect(20, 20, 50, 50);
+  TitleScreen.prototype.time = 0;
+  TitleScreen.prototype.minLength = 3;
+  TitleScreen.prototype.render = function(ctx) {
+    ctx.fillStyle = "rgb(" + (this.rnd()) + "," + (this.rnd()) + "," + (this.rnd()) + ")";
+    return ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   };
   TitleScreen.prototype.rnd = function() {
     return ~~(Math.random() * 255);
   };
-  TitleScreen.prototype.tick = function(input) {};
+  TitleScreen.prototype.tick = function(input) {
+    if (++this.time < this.minLength) {
+      return;
+    }
+    if (input.buttons[input.FIRE] && !input.oldButtons[input.FIRE]) {
+      console.log("selected start from TitleScreen");
+      this.setScreen(new GameScreen);
+      return input.releaseAllKeys();
+    }
+  };
   return TitleScreen;
 })();

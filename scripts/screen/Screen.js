@@ -1,15 +1,15 @@
 var Screen;
 Screen = (function() {
-  function Screen(game) {
+  function Screen() {}
+  Screen.prototype.init = function(game) {
     this.game = game;
-  }
-  Screen.prototype.init = function() {
-    return console.log('new Screen');
+    return console.log("new Screen (base)");
   };
-  Screen.prototype.removed = function() {};
   Screen.prototype.setScreen = function(screen) {
+    console.log("called", this.game);
     return this.game.setScreen(screen);
   };
+  Screen.prototype.removed = function() {};
   Screen.prototype.render = function(context) {};
   Screen.prototype.tick = function(input) {};
   return Screen;
