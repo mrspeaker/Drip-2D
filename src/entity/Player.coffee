@@ -10,7 +10,7 @@ class Player extends Entity
             @dir = 0
 
         @x += @dir
-    
+
     render: (ctx) ->
         ctx.fillStyle = "#ff0"
         ctx.fillRect( @x, @y, @w, @h )

@@ -6,14 +6,16 @@
 ###
 main =
     rate: 10
+    GAME_WIDTH: 300
+    GAME_HEIGHT: 130
     init: -> 
         console.log "game init"
         @ctx = $("#screen").dom[0].getContext("2d");
 
         @bindKeys()
         @input = new Input
-        @setScreen new TitleScreen
 
+        @setScreen new TitleScreen
         @start()
         @run()
 
