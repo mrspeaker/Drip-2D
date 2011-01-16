@@ -23,7 +23,7 @@ class Input
             when 90 then button = @ROTATE
             when 27 then button = @ESCAPE
             else button = -1
-        if button > 0 then @buttons[button] = blnDown
+        if button > -1 then @buttons[button] = blnDown
         
     tick: -> @oldButtons = _.clone @buttons
     releaseAllKeys: -> @buttons = (false for [0..@buttons.length])

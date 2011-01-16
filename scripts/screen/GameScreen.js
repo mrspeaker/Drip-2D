@@ -9,18 +9,19 @@ var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, par
 };
 GameScreen = (function() {
   __extends(GameScreen, Screen);
-  GameScreen.prototype.tickers = 0;
   function GameScreen() {
-    this.level = new Level(this);
+    this.level = new Level(this, 32, 24);
   }
   GameScreen.prototype.render = function(ctx) {
     ctx.fillStyle = "rgb(0,0,0)";
-    return ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    return this.level.render(ctx);
   };
   GameScreen.prototype.tick = function(input) {
     if (input.buttons[input.ESCAPE] && !input.oldButtons[input.ESCAPE]) {
-      return this.setScreen(new PauseScreen(this));
+      this.setScreen(new PauseScreen(this));
     }
+    return this.level.tick(input);
   };
   return GameScreen;
 })();

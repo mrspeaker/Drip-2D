@@ -6,7 +6,7 @@
 */var main;
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 main = {
-  rate: 20,
+  rate: 10,
   init: function() {
     console.log("game init");
     this.ctx = $("#screen").dom[0].getContext("2d");
