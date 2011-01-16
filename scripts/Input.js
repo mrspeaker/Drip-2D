@@ -53,7 +53,7 @@ Input = (function() {
       default:
         button = -1;
     }
-    if (button > 0) {
+    if (button > -1) {
       return this.buttons[button] = blnDown;
     }
   };
