@@ -15,8 +15,8 @@ COFFEE_FILES = ${SRC_DIR}/main.coffee\
 all:
 	@@echo "Starting build..."
 
-	#@@coffee -o scripts/ -j -c ${COFFEE_FILES}
-	# Can't figure out how to join AND watch, so just watchin' for now
-	@@coffee -w -o ${DST_DIR} -c ${SRC_DIR}
-
+# @@coffee -o scripts/ -j -c ${COFFEE_FILES}
+# Can't figure out how to join AND watch, so just watchin' for now
+# and bare because I can't join it!
+	@@coffee --watch --bare --output ${DST_DIR} --compile ${SRC_DIR}
 
