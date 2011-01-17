@@ -13,6 +13,11 @@ Baddie = (function() {
     this.x = x;
     this.y = y;
   }
+  Baddie.prototype.tick = function() {
+    if (Math.random() * 10 < 1) {
+      return this.x++;
+    }
+  };
   Baddie.prototype.render = function(ctx) {
     ctx.fillStyle = "#f0f";
     return ctx.fillRect(this.x, this.y, this.w, this.h);

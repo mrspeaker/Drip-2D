@@ -12,5 +12,4 @@ class Player extends Entity
         @x += @dir
 
     render: (ctx) ->
-        ctx.fillStyle = "#ff0"
-        ctx.fillRect( @x, @y, @w, @h )
+        Art.draw ctx, Art.player, @x, @y, 6

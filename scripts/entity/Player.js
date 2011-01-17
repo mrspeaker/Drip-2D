@@ -26,8 +26,7 @@ Player = (function() {
     return this.x += this.dir;
   };
   Player.prototype.render = function(ctx) {
-    ctx.fillStyle = "#ff0";
-    return ctx.fillRect(this.x, this.y, this.w, this.h);
+    return Art.draw(ctx, Art.player, this.x, this.y, 6);
   };
   return Player;
 })();

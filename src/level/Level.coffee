@@ -8,7 +8,8 @@ class Level
         @entities.push @baddie
 
     tick: (input) ->
-        if not @player.removed then @player.tick input;
+        for e in @entities
+            e.tick input if not e.removed
 
     render: (ctx, camera) ->
         ctx.translate -camera.x, -camera.y

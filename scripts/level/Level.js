@@ -10,9 +10,14 @@ Level = (function() {
     this.entities.push(this.baddie);
   }
   Level.prototype.tick = function(input) {
-    if (!this.player.removed) {
-      return this.player.tick(input);
+    var e, _i, _len, _ref, _results;
+    _ref = this.entities;
+    _results = [];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      e = _ref[_i];
+      _results.push(!e.removed ? e.tick(input) : void 0);
     }
+    return _results;
   };
   Level.prototype.render = function(ctx, camera) {
     var e, _i, _len, _ref, _results;
