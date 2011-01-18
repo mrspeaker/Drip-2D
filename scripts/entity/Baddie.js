@@ -12,15 +12,17 @@ Baddie = (function() {
   function Baddie(x, y) {
     this.x = x;
     this.y = y;
+    this.frame = 0;
+    this.speed = 10;
   }
   Baddie.prototype.tick = function() {
-    if (Math.random() * 10 < 1) {
-      return this.x++;
+    this.frame++;
+    if (++this.x > 300) {
+      return this.x = -this.w;
     }
   };
   Baddie.prototype.render = function(ctx) {
-    ctx.fillStyle = "#f0f";
-    return ctx.fillRect(this.x, this.y, this.w, this.h);
+    return Art.draw(ctx, Art.baddie, this.x, this.y, ~~(this.frame / this.speed) % 7);
   };
   return Baddie;
 })();

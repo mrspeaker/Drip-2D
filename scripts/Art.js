@@ -4,12 +4,8 @@ Sprite = (function() {
     this.w = w;
     this.h = h;
     this.frames = frames;
-    if (xOff == null) {
-      xOff = 0;
-    }
-    if (yOff == null) {
-      yOff = 0;
-    }
+    this.xOff = xOff != null ? xOff : 0;
+    this.yOff = yOff != null ? yOff : 0;
     if (xSpace == null) {
       xSpace = 0;
     }
@@ -23,10 +19,12 @@ Sprite = (function() {
 })();
 Art = {
   init: function() {
-    return this.player = new Sprite("resources/galag.png", 24, 20, 8);
+    this.player = new Sprite("resources/galag.png", 24, 24, 8, 0, 0);
+    this.player_red = new Sprite("resources/galag.png", 24, 24, 8, 0, 1);
+    return this.baddie = new Sprite("resources/galag.png", 24, 24, 8, 0, 2);
   },
   draw: function(ctx, art, x, y, frame) {
-    return ctx.drawImage(art.image, frame * art.w, 0, art.w, art.h, x, y, art.w, art.h);
+    return ctx.drawImage(art.image, frame * art.w, art.yOff * art.h, art.w, art.h, x, y, art.w, art.h);
   }
 };
 Art.init();

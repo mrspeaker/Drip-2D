@@ -12,6 +12,8 @@ Player = (function() {
   function Player(x, y) {
     this.x = x;
     this.y = y;
+    this.frame = 0;
+    this.speed = 20;
   }
   Player.prototype.tick = function(input) {
     if (input.buttons[input.LEFT]) {
@@ -23,10 +25,15 @@ Player = (function() {
     if (input.buttons[input.UP]) {
       this.dir = 0;
     }
-    return this.x += this.dir;
+    this.x += this.dir;
+    return this.frame++;
   };
   Player.prototype.render = function(ctx) {
-    return Art.draw(ctx, Art.player, this.x, this.y, 6);
+    if (~~(this.frame / this.speed) % 2 === 0) {
+      return Art.draw(ctx, Art.player, this.x, this.y, 7);
+    } else {
+      return Art.draw(ctx, Art.player_red, this.x, this.y, 7);
+    }
   };
   return Player;
 })();

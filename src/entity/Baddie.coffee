@@ -1,10 +1,11 @@
 class Baddie extends Entity
     constructor: (@x, @y) ->
+        @frame = 0
+        @speed = 10
     
     tick: ->
-        if Math.random() * 10 < 1
-            @x++
+        @frame++
+        if ++@x > 300 then @x = -@w
 
     render: (ctx) ->
-        ctx.fillStyle = "#f0f"
-        ctx.fillRect @x, @y, @w, @h
+        Art.draw ctx, Art.baddie, @x, @y, ~~(@frame/@speed) % 7

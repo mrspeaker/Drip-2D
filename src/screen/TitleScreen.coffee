@@ -14,3 +14,5 @@ class TitleScreen extends Screen
             console.log "selected start from TitleScreen"
             @setScreen new GameScreen
             input.releaseAllKeys()
+
+            

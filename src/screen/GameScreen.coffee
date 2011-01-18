@@ -1,6 +1,6 @@
 class GameScreen extends Screen
     constructor: ->
-        @level = new Level this, 132, 134
+        @level = new Level this, 132, 124
         @camera = new Camera main.GAME_WIDTH, main.GAME_HEIGHT
 
     render: (ctx) ->
