@@ -19,7 +19,7 @@ GameScreen = (function() {
     return this.level.render(ctx, this.camera);
   };
   GameScreen.prototype.tick = function(input) {
-    if (input.buttons[input.ESCAPE] && !input.oldButtons[input.ESCAPE]) {
+    if (input.pressed(input.ESCAPE)) {
       this.setScreen(new PauseScreen(this));
     }
     return this.level.tick(input);

@@ -7,7 +7,6 @@ class Entity
     removed: false
 
     init: (@level) ->
-
     tick: ->
-    
     render: (ctx) ->
+    remove: -> @removed = true

@@ -12,5 +12,8 @@ Entity = (function() {
   };
   Entity.prototype.tick = function() {};
   Entity.prototype.render = function(ctx) {};
+  Entity.prototype.remove = function() {
+    return this.removed = true;
+  };
   return Entity;
 })();

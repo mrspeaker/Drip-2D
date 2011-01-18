@@ -36,4 +36,3 @@ main =
     bindKeys: () ->
         $(window).bind "keydown", (e) => @input.set e.keyCode, true
         $(window).bind "keyup", (e) => @input.set e.keyCode, false
-

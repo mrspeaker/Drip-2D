@@ -13,10 +13,21 @@ TitleScreen = (function() {
   }
   __extends(TitleScreen, Screen);
   TitleScreen.prototype.time = 0;
-  TitleScreen.prototype.minLength = 50;
+  TitleScreen.prototype.minLength = 1;
   TitleScreen.prototype.render = function(ctx) {
+    if (Math.random() < 0.05) {
+      return this.drawSplash(ctx);
+    }
+  };
+  TitleScreen.prototype.drawSplash = function(ctx) {
     ctx.fillStyle = "rgb(" + (this.rnd()) + "," + (this.rnd()) + "," + (this.rnd()) + ")";
-    return ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillStyle = "#000";
+    ctx.font = "bold 16px sans-serif";
+    ctx.fillText("CoffeeScript Engine v0.1", 30, 43);
+    ctx.fillText("space to fire/start", 30, 83);
+    ctx.fillText("cursor to move, up to stop", 30, 103);
+    return ctx.fillText("esc to pause", 30, 123);
   };
   TitleScreen.prototype.rnd = function() {
     return ~~(Math.random() * 255);
@@ -25,7 +36,7 @@ TitleScreen = (function() {
     if (++this.time < this.minLength) {
       return;
     }
-    if (input.buttons[input.FIRE] && !input.oldButtons[input.FIRE]) {
+    if (input.pressed(input.FIRE)) {
       console.log("selected start from TitleScreen");
       this.setScreen(new GameScreen);
       return input.releaseAllKeys();

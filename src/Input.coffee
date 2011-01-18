@@ -12,6 +12,9 @@ class Input
 
     constructor: () ->
         console.debug "new Input"
+        
+    pressed: (button) ->
+        @buttons[button] && !@oldButtons[button]
 
     set: (key, blnDown) -> 
         switch key
@@ -24,6 +27,6 @@ class Input
             when 27 then button = @ESCAPE
             else button = -1
         if button > -1 then @buttons[button] = blnDown
-        
+    
     tick: -> @oldButtons = _.clone @buttons
     releaseAllKeys: -> @buttons = (false for [0..@buttons.length])

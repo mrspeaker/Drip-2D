@@ -13,7 +13,7 @@ Baddie = (function() {
     this.x = x;
     this.y = y;
     this.frame = 0;
-    this.speed = 10;
+    this.speed = 20;
   }
   Baddie.prototype.tick = function() {
     this.frame++;
@@ -22,7 +22,7 @@ Baddie = (function() {
     }
   };
   Baddie.prototype.render = function(ctx) {
-    return Art.draw(ctx, Art.baddie, this.x, this.y, ~~(this.frame / this.speed) % 7);
+    return Art.draw(ctx, Art.baddie, this.x, this.y, ~~(this.frame / this.speed) % 2 === 0 ? 6 : 7);
   };
   return Baddie;
 })();

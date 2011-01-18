@@ -26,6 +26,9 @@ Input = (function() {
   function Input() {
     console.debug("new Input");
   }
+  Input.prototype.pressed = function(button) {
+    return this.buttons[button] && !this.oldButtons[button];
+  };
   Input.prototype.set = function(key, blnDown) {
     var button;
     switch (key) {

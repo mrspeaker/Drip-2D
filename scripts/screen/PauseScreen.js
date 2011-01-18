@@ -13,11 +13,17 @@ PauseScreen = (function() {
     this.parent = parent;
   }
   PauseScreen.prototype.render = function(ctx) {
-    ctx.fillStyle = "rgb(250,250,250)";
-    return ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillStyle = "rgb(50,50,150)";
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    Art.player.draw(ctx, 100, 100, 7);
+    Art.player_red.draw(ctx, 130, 100, 7);
+    Art.baddie.draw(ctx, 100, 70, 7);
+    Art.baddie.draw(ctx, 130, 70, 6);
+    ctx.fillStyle = "#000";
+    return Art.drawText(ctx, "PAUSED", 48, 43);
   };
   PauseScreen.prototype.tick = function(input) {
-    if (input.buttons[input.ESCAPE] && !input.oldButtons[input.ESCAPE]) {
+    if (input.pressed(input.ESCAPE)) {
       return this.setScreen(this.parent);
     }
   };

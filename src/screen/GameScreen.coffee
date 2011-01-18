@@ -9,6 +9,5 @@ class GameScreen extends Screen
         @level.render ctx, @camera
 
     tick: (input) ->
-        if input.buttons[input.ESCAPE] and !input.oldButtons[input.ESCAPE]    
-            @setScreen new PauseScreen this
+        if input.pressed input.ESCAPE then @setScreen new PauseScreen this
         @level.tick input
