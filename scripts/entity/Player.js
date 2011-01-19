@@ -8,40 +8,58 @@ var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, par
   return child;
 };
 Player = (function() {
+  var dir;
   __extends(Player, Entity);
-  Player.prototype.frame = 0;
-  Player.prototype.speed = 20;
-  Player.prototype.fired = 0;
-  function Player(x, y) {
+  Player.prototype.fireFade = 0;
+  Player.prototype.speed = 1.5;
+  dir = direction.NONE;
+  function Player(x, y, w, h) {
     this.x = x;
     this.y = y;
+    this.w = w;
+    this.h = h;
   }
   Player.prototype.tick = function(input) {
-    if (input.buttons[input.LEFT]) {
-      this.dir = -1.5;
+    this.setDirection(input);
+    if (this.dir !== direction.NONE) {
+      this.move();
     }
-    if (input.buttons[input.RIGHT]) {
-      this.dir = 1.5;
+    if (input.pressed(input.FIRE)) {
+      this.fire();
     }
-    if (input.buttons[input.UP]) {
-      this.dir = 0;
+    if (this.fireFade > 0) {
+      return this.fireFade--;
     }
-    this.x += this.dir;
+  };
+  Player.prototype.render = function(ctx) {
+    return [Art.player, Art.player_red][this.fireFade > 0 ? 1: 0].draw(ctx, ~~this.x, this.y, 7);
+  };
+  Player.prototype.move = function() {
+    this.x += this.dir === direction.RIGHT ? this.speed : -this.speed;
     if (this.x < 0) {
       this.x = 0;
     }
-    if (this.x > 280) {
-      this.x = 280;
+    if (this.x > this.level.width - this.w) {
+      return this.x = this.level.width - this.w;
     }
-    this.fired--;
-    if (input.pressed(input.FIRE)) {
-      this.fired = 10;
-      this.level.add(new Bullet(~~(this.x + this.w / 2 + 3), this.y - 5));
-    }
-    return this.frame++;
   };
-  Player.prototype.render = function(ctx) {
-    return [Art.player, Art.player_red][this.fired > 0 ? 1 : 0].draw(ctx, ~~this.x, this.y, 7);
+  Player.prototype.fire = function() {
+    this.fireFade = 10;
+    return this.level.add(new Bullet(~~(this.x + this.w / 2 + 3), this.y - 5, 0, -1.5));
+  };
+  Player.prototype.shot = function(bullet) {
+    return this.level.gameOver();
+  };
+  Player.prototype.setDirection = function(input) {
+    if (input.buttons[input.LEFT]) {
+      this.dir = direction.LEFT;
+    }
+    if (input.buttons[input.RIGHT]) {
+      this.dir = direction.RIGHT;
+    }
+    if (input.buttons[input.UP]) {
+      return this.dir = direction.NONE;
+    }
   };
   return Player;
 })();

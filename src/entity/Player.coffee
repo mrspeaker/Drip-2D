@@ -1,23 +1,31 @@
 class Player extends Entity
-    frame: 0
-    speed: 20
-    fired: 0
-    constructor: (@x, @y) ->
+    fireFade: 0
+    speed: 1.5
+    dir = direction.NONE
+    constructor: (@x, @y, @w, @h) ->
 
     tick: (input) ->
-        if input.buttons[input.LEFT] then @dir = -1.5
-        if input.buttons[input.RIGHT] then @dir = 1.5
-        if input.buttons[input.UP] then @dir = 0
-        @x += @dir
-        if @x < 0 then @x = 0
-        if @x > 280 then @x = 280
-        
-        @fired--
-        if input.pressed input.FIRE
-            @fired = 10
-            @level.add new Bullet ~~(@x + @w / 2 + 3), @y - 5
-
-        @frame++
+        @setDirection input
+        @move() if @dir != direction.NONE
+        @fire() if input.pressed input.FIRE
+        @fireFade-- if @fireFade > 0
 
     render: (ctx) ->
-        [Art.player, Art.player_red][if @fired > 0 then 1 else 0].draw ctx, ~~@x, @y, 7
+        [Art.player, Art.player_red][@fireFade > `0 ? 1: 0`].draw ctx, ~~@x, @y, 7
+
+    move: ->
+        @x += if @dir == direction.RIGHT then @speed else -@speed
+        if @x < 0 then @x = 0
+        if @x > @level.width - @w then @x = @level.width - @w
+
+    fire: ->
+        @fireFade = 10
+        @level.add new Bullet ~~(@x + @w / 2 + 3), @y - 5, 0, -1.5
+
+    shot: (bullet) ->
+        @level.gameOver()
+
+    setDirection: (input) ->
+        if input.buttons[input.LEFT] then @dir = direction.LEFT
+        if input.buttons[input.RIGHT] then @dir = direction.RIGHT
+        if input.buttons[input.UP] then @dir = direction.NONE

@@ -13,7 +13,15 @@ TitleScreen = (function() {
   }
   __extends(TitleScreen, Screen);
   TitleScreen.prototype.time = 0;
-  TitleScreen.prototype.minLength = 1;
+  TitleScreen.prototype.minLength = 100;
+  TitleScreen.prototype.tick = function(input) {
+    if (++this.time < this.minLength) {
+      return;
+    }
+    if (input.pressed(input.FIRE)) {
+      return this.startGame(input);
+    }
+  };
   TitleScreen.prototype.render = function(ctx) {
     if (Math.random() < 0.05) {
       return this.drawSplash(ctx);
@@ -32,15 +40,10 @@ TitleScreen = (function() {
   TitleScreen.prototype.rnd = function() {
     return ~~(Math.random() * 255);
   };
-  TitleScreen.prototype.tick = function(input) {
-    if (++this.time < this.minLength) {
-      return;
-    }
-    if (input.pressed(input.FIRE)) {
-      console.log("selected start from TitleScreen");
-      this.setScreen(new GameScreen);
-      return input.releaseAllKeys();
-    }
+  TitleScreen.prototype.startGame = function(input) {
+    console.log("selected start from TitleScreen");
+    this.setScreen(new GameScreen);
+    return input.releaseAllKeys();
   };
   return TitleScreen;
 })();

@@ -16,13 +16,25 @@ Baddie = (function() {
     this.speed = 20;
   }
   Baddie.prototype.tick = function() {
-    this.frame++;
-    if (++this.x > 300) {
-      return this.x = -this.w;
+    this.move();
+    if ((Math.random() * 1000) < 2) {
+      return this.fire();
     }
   };
   Baddie.prototype.render = function(ctx) {
-    return Art.draw(ctx, Art.baddie, this.x, this.y, ~~(this.frame / this.speed) % 2 === 0 ? 6 : 7);
+    return Art.baddie.draw(ctx, this.x, this.y, ~~(++this.frame / this.speed) % 2 === 0 ? 6 : 7);
+  };
+  Baddie.prototype.move = function() {
+    if (++this.x > this.level.width) {
+      return this.x = -this.w;
+    }
+  };
+  Baddie.prototype.fire = function() {
+    return this.level.add(new Bullet(~~(this.x + this.w / 2 + 3), this.y + 15, 0, 1.5));
+  };
+  Baddie.prototype.shot = function(bullet) {
+    this.remove();
+    return this.level.kill();
   };
   return Baddie;
 })();

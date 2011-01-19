@@ -10,19 +10,19 @@ var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, par
 GameScreen = (function() {
   __extends(GameScreen, Screen);
   function GameScreen() {
-    this.level = new Level(this, 132, 124);
-    this.camera = new Camera(main.GAME_WIDTH, main.GAME_HEIGHT);
+    this.level = new Level(this, 300, 150, 132, 124);
+    this.camera = new Camera(this.level.width, this.level.height);
   }
-  GameScreen.prototype.render = function(ctx) {
-    ctx.fillStyle = "rgb(0,0,0)";
-    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    return this.level.render(ctx, this.camera);
-  };
   GameScreen.prototype.tick = function(input) {
     if (input.pressed(input.ESCAPE)) {
       this.setScreen(new PauseScreen(this));
     }
     return this.level.tick(input);
+  };
+  GameScreen.prototype.render = function(ctx) {
+    ctx.fillStyle = "rgb(0,0,0)";
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    return this.level.render(ctx, this.camera);
   };
   return GameScreen;
 })();

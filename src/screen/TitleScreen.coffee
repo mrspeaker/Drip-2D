@@ -1,6 +1,10 @@
 class TitleScreen extends Screen
     time: 0
-    minLength: 1
+    minLength: 100
+
+    tick: (input) ->
+        if ++@time < @minLength then return
+        @startGame input if input.pressed input.FIRE
 
     render: (ctx) ->
         if Math.random() < 0.05 then @drawSplash ctx
@@ -17,10 +21,8 @@ class TitleScreen extends Screen
 
     rnd: -> ~~(Math.random() * 255)
 
-    tick: (input) ->
-        if ++@time < @minLength then return
+    startGame: (input) ->
+        console.log "selected start from TitleScreen"
+        @setScreen new GameScreen
+        input.releaseAllKeys()
 
-        if input.pressed input.FIRE
-            console.log "selected start from TitleScreen"
-            @setScreen new GameScreen
-            input.releaseAllKeys()
