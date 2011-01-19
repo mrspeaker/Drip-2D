@@ -14,6 +14,8 @@ Bullet = (function() {
     this.y = y;
     this.xSpeed = xSpeed;
     this.ySpeed = ySpeed;
+    this.w = 1;
+    this.h = 5;
   }
   Bullet.prototype.tick = function() {
     this.move();
@@ -42,7 +44,8 @@ Bullet = (function() {
       if (e === this) {
         continue;
       }
-      _results.push((typeof e.shot === "function" ? e.shot(this) : void 0) ? this.remove() : void 0);
+      e.shot && e.shot(this);
+      _results.push(this.remove());
     }
     return _results;
   };

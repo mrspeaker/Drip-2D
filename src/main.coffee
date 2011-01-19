@@ -1,14 +1,11 @@
 ###
-    Tetris vs Space Invaders
+    Instant Engine: coffeescript game framework
     by Mr Speaker
     
     Code structure and bits of code liberally borrowed from MetaGun.
     
     Next TODOs:
-        remove zepto
-        fix restart bug
         generic collision (behaviour?)
-        art cutup proper
         timing loop (+ frame counter)
 ###
 main =
@@ -16,7 +13,8 @@ main =
 
     init: -> 
         console.log "game init"
-        @ctx = $("#screen").dom[0].getContext("2d");
+        @ctx = document.getElementById("screen").getContext "2d";
+        
         @bindKeys()
         @reset()
         @run()
@@ -24,7 +22,6 @@ main =
     stop: -> @running = false
     start: -> @running = true
     reset: ->
-        console.log @screen
         @screen = null
         @input = null
         
@@ -45,5 +42,5 @@ main =
         screen.init(this)
 
     bindKeys: () ->
-        $(window).bind "keydown", (e) => @input.set e.keyCode, true
-        $(window).bind "keyup", (e) => @input.set e.keyCode, false
+        addEventListener "keydown", ((e) => @input.set e.keyCode, true), false
+        addEventListener "keyup", ((e) => @input.set e.keyCode, false), false

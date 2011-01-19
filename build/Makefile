@@ -1,4 +1,4 @@
-# Tetris Vs Space Invaders build file
+# InstantEngine build file
 SRC_DIR = ../src
 DST_DIR = ../scripts
 

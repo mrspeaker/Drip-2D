@@ -9,11 +9,14 @@ var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, par
 };
 Baddie = (function() {
   __extends(Baddie, Entity);
-  function Baddie(x, y) {
+  Baddie.prototype.frame = 0;
+  Baddie.prototype.speed = 20;
+  function Baddie(x, y, w, h, type) {
     this.x = x;
     this.y = y;
-    this.frame = 0;
-    this.speed = 20;
+    this.w = w;
+    this.h = h;
+    this.type = type;
   }
   Baddie.prototype.tick = function() {
     this.move();
@@ -22,7 +25,10 @@ Baddie = (function() {
     }
   };
   Baddie.prototype.render = function(ctx) {
-    return Art.baddie.draw(ctx, this.x, this.y, ~~(++this.frame / this.speed) % 2 === 0 ? 6 : 7);
+    var art, frame;
+    art = this.type === 0 ? Art.baddie : Art.baddie2;
+    frame = ~~(++this.frame / this.speed) % 2 === 0 ? 6 : 7;
+    return art.draw(ctx, this.x, this.y, frame);
   };
   Baddie.prototype.move = function() {
     if (++this.x > this.level.width) {
@@ -30,7 +36,7 @@ Baddie = (function() {
     }
   };
   Baddie.prototype.fire = function() {
-    return this.level.add(new Bullet(~~(this.x + this.w / 2 + 3), this.y + 15, 0, 1.5));
+    return this.level.add(new Bullet(~~(this.x + this.w / 2) - 4, this.y + this.h, 0, 1.5));
   };
   Baddie.prototype.shot = function(bullet) {
     this.remove();

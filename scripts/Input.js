@@ -24,7 +24,7 @@ Input = (function() {
     return _results;
   })();
   function Input() {
-    console.debug("new Input");
+    console.log("new Input");
   }
   Input.prototype.pressed = function(button) {
     return this.buttons[button] && !this.oldButtons[button];

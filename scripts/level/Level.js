@@ -1,25 +1,20 @@
 var Level;
 Level = (function() {
-  Level.prototype.entities = [];
-  Level.prototype.newEntities = [];
-  Level.prototype.time = 0;
-  Level.prototype.resetGame = false;
   function Level(screen, width, height, spawnX, spawnY) {
     var i, _ref;
     this.screen = screen;
     this.width = width;
     this.height = height;
-    this.baddieCount = 4;
+    this.entities = [];
+    this.newEntities = [];
+    this.add(new Player(spawnX, spawnY, 20, 20));
+    this.baddieCount = 5;
     for (i = 0, _ref = this.baddieCount - 1; (0 <= _ref ? i <= _ref : i >= _ref); (0 <= _ref ? i += 1 : i -= 1)) {
-      this.add(new Baddie(20 * i, 10, 24, 20));
+      this.add(new Baddie(20 * i, 10, 20, 20, i % 2));
     }
-    this.add(new Player(spawnX, spawnY, 24, 20));
   }
   Level.prototype.tick = function(input) {
     var aliveEntities, e, _i, _j, _len, _len2, _ref, _ref2;
-    if (this.time++ === 0) {
-      console.log("SHOULD BE EMPTY:", this.entites, this.newEntities);
-    }
     aliveEntities = [];
     _ref = this.entities;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {

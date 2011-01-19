@@ -1,6 +1,8 @@
 class Bullet extends Entity
     constructor: (@x, @y, @xSpeed, @ySpeed) ->
-        
+        @w = 1
+        @h = 5
+
     tick: ->
         @move()
         @collisions()
@@ -19,4 +21,5 @@ class Bullet extends Entity
         entities = @level.getColliding @x, @y, 1, 1
         for e in entities
             continue if e == this
-            @remove() if e.shot? this
+            e.shot and e.shot this
+            @remove()

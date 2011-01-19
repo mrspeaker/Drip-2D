@@ -1,17 +1,17 @@
 class Level
-    entities: []
-    newEntities: []
-    time: 0
-    resetGame: false
+
     constructor: (@screen, @width, @height, spawnX, spawnY) ->
+        @entities = []
+        @newEntities = []
+
         # TODO: abstract level to seperate file
-        @baddieCount = 4
-        @add new Baddie 20 * i, 10, 24, 20 for i in [0..@baddieCount - 1]
-        @add new Player spawnX, spawnY, 24, 20
+        @add new Player spawnX, spawnY, 20, 20
+        @baddieCount = 5
+        for i in [0..@baddieCount - 1]
+            @add new Baddie 20 * i, 10, 20, 20, i % 2
+
 
     tick: (input) ->
-        if @time++ == 0 then console.log "SHOULD BE EMPTY:", @entites, @newEntities
-        
         # process all entities
         aliveEntities = []
         for e in @entities
@@ -54,6 +54,7 @@ class Level
         y0 = (yc - r) / 10
         x1 = (xc + w + r) / 10
         y1 = (yc + h + r) / 10
+        # TODO: fix which entities to check
         for e in @entities
             if e.x > xc + w || e.y + e.h > yc + h || e.x + e.w < xc || e.y + e.h < yc
                 continue

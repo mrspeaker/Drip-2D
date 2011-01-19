@@ -20,7 +20,7 @@ class Player extends Entity
 
     fire: ->
         @fireFade = 10
-        @level.add new Bullet ~~(@x + @w / 2 + 3), @y - 5, 0, -1.5
+        @level.add new Bullet ~~(@x + @w / 2)-2, @y - 5, 0, -1.5
 
     shot: (bullet) ->
         @level.gameOver()

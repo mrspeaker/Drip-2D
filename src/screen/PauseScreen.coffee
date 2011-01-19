@@ -9,7 +9,7 @@ class PauseScreen extends Screen
         Art.player_red.draw ctx, 130, 100, 7
         Art.baddie.draw ctx, 100, 70, 7
         Art.baddie.draw ctx, 130, 70, 6
-        
+
         ctx.fillStyle = "#000"
         Art.drawText ctx, "PAUSED", 48, 43
 

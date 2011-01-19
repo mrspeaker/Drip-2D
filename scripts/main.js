@@ -5,10 +5,7 @@
     Code structure and bits of code liberally borrowed from MetaGun.
 
     Next TODOs:
-        remove zepto
-        fix restart bug
         generic collision (behaviour?)
-        art cutup proper
         timing loop (+ frame counter)
 */var main;
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
@@ -16,7 +13,7 @@ main = {
   rate: 10,
   init: function() {
     console.log("game init");
-    this.ctx = $("#screen").dom[0].getContext("2d");
+    this.ctx = document.getElementById("screen").getContext("2d");
     this.bindKeys();
     this.reset();
     return this.run();
@@ -28,7 +25,6 @@ main = {
     return this.running = true;
   },
   reset: function() {
-    console.log(this.screen);
     this.screen = null;
     this.input = null;
     this.input = new Input;
@@ -54,11 +50,11 @@ main = {
     return screen.init(this);
   },
   bindKeys: function() {
-    $(window).bind("keydown", __bind(function(e) {
+    addEventListener("keydown", (__bind(function(e) {
       return this.input.set(e.keyCode, true);
-    }, this));
-    return $(window).bind("keyup", __bind(function(e) {
+    }, this)), false);
+    return addEventListener("keyup", (__bind(function(e) {
       return this.input.set(e.keyCode, false);
-    }, this));
+    }, this)), false);
   }
 };

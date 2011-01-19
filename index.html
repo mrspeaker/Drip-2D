@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Tetris Vs Space Invaders</title>
+        <title>Instant Engine</title>
     </head>
     <body>
         <canvas id="screen" width="300" height="150"></canvas>
-        <script src="lib/zepto.js" type="text/javascript" charset="utf-8"></script>
         <script src="lib/underscore.js" type="text/javascript" charset="utf-8"></script>
         <script src="scripts/main.js" type="text/javascript" charset="utf-8"></script>
         <script src="scripts/Input.js" type="text/javascript" charset="utf-8"></script>
@@ -22,9 +21,9 @@
         <script src="scripts/level/Level.js" type="text/javascript" charset="utf-8"></script>
 
         <script type="text/javascript" charset="utf-8">
-            $(document).ready(function(){
+            window.addEventListener("load", function(){
                 main.init();
-            });
+            }, false);
         </script>
     </body>
 </html>

@@ -11,7 +11,7 @@ class Input
     oldButtons: (false for [0..6])
 
     constructor: () ->
-        console.debug "new Input"
+        console.log "new Input"
         
     pressed: (button) ->
         @buttons[button] && !@oldButtons[button]

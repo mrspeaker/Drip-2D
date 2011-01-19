@@ -45,7 +45,7 @@ Player = (function() {
   };
   Player.prototype.fire = function() {
     this.fireFade = 10;
-    return this.level.add(new Bullet(~~(this.x + this.w / 2 + 3), this.y - 5, 0, -1.5));
+    return this.level.add(new Bullet(~~(this.x + this.w / 2) - 2, this.y - 5, 0, -1.5));
   };
   Player.prototype.shot = function(bullet) {
     return this.level.gameOver();
