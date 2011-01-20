@@ -1,12 +1,6 @@
 /*
-    Tetris vs Space Invaders
+    Drip 2D: coffeescript game framework
     by Mr Speaker
-
-    Code structure and bits of code liberally borrowed from MetaGun.
-
-    Next TODOs:
-        generic collision (behaviour?)
-        timing loop (+ frame counter)
 */var main;
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 main = {
