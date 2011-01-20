@@ -1,5 +1,5 @@
 ###
-    Instant Engine: coffeescript game framework
+    Drip 2D: coffeescript game framework
     by Mr Speaker
     
     Code structure and bits of code liberally borrowed from MetaGun.

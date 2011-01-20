@@ -1,4 +1,4 @@
-# InstantEngine build file
+# Drip 2D build file
 SRC_DIR = ../src
 DST_DIR = ../scripts
 

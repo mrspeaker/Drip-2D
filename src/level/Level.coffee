@@ -10,7 +10,6 @@ class Level
         for i in [0..@baddieCount - 1]
             @add new Baddie 20 * i, 10, 20, 20, i % 2
 
-
     tick: (input) ->
         # process all entities
         aliveEntities = []
