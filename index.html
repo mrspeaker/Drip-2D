@@ -2,9 +2,32 @@
 <html>
     <head>
         <title>Drip 2D</title>
+        <style type="text/css" media="screen">
+            #scripz {
+                width: 450px;
+                height: 150px;
+                font-size:8pt;
+                font-family: monospace;
+            }
+        </style>
     </head>
     <body>
         <canvas id="screen" width="300" height="150"></canvas>
+        <textarea id="scripz">
+class Lol extends Entity
+  constructor: (@x, @y)->
+  tick: ->
+    @x+=0.125
+  render: (ctx) ->
+    ctx.fillStyle = "#ff0"
+    ctx.fillRect @x-2,@y-2,10,10
+    Art.player.draw ctx, @x, @y, ~~(@x/10) % 7
+
+Events.trigger "entity.make", [Lol,30,30]
+Events.trigger "entity.make", [Lol,40,50]
+        </textarea>
+        <button id="run-scripz">go</button>
+        <script src="lib/coffee-script.js" type="text/javascript" charset="utf-8"></script>
         <script src="lib/underscore.js" type="text/javascript" charset="utf-8"></script>
         <script src="scripts/Utils.js" type="text/javascript" charset="utf-8"></script>
         <script src="scripts/Input.js" type="text/javascript" charset="utf-8"></script>
@@ -20,12 +43,22 @@
         <script src="scripts/entity/Bullet.js" type="text/javascript" charset="utf-8"></script>
         <script src="scripts/level/Camera.js" type="text/javascript" charset="utf-8"></script>
         <script src="scripts/level/Level.js" type="text/javascript" charset="utf-8"></script>
+        <script src="scripts/DATA/Data.js" type="text/javascript" charset="utf-8"></script>
         <script src="scripts/main.js" type="text/javascript" charset="utf-8"></script>
-        
-        <script type="text/javascript" charset="utf-8">
-            window.addEventListener("load", function(){
-                main.init();
-            }, false);
+
+        <script type="text/coffeescript"> 
+
+            compileSource = ->
+                window.compiledScripz = ""
+                source = document.getElementById("scripz").value
+                try
+                    eval CoffeeScript.compile source, bare: on
+                catch error
+                    console.log error
+            
+            # run it!
+            document.getElementById("run-scripz").onclick = compileSource
+            window.addEventListener "load", (->main.init()), false
         </script>
     </body>
 </html>

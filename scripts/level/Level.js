@@ -17,7 +17,8 @@ Level = (function() {
     });
     Events.bind("entity.make", __bind(function(data) {
       var b, entityClass;
-      entityClass = this.classes[data[0]];
+      entityClass = typeof data[0] === "string" ? this.classes[data[0]] : data[0];
+      console.log(entityClass);
       b = new entityClass(data[1], data[2], 20, 20, data[3]);
       return this.add(b);
     }, this));

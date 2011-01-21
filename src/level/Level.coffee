@@ -10,7 +10,8 @@ class Level
             
         Events.bind "player.create", (data) -> console.log "Player created"
         Events.bind "entity.make", (data) =>
-            entityClass = @classes[data[0]]
+            entityClass = if typeof data[0] == "string" then @classes[data[0]] else data[0]
+            console.log(entityClass)
             b = new entityClass data[1], data[2], 20, 20, data[3]
             @add b
 
