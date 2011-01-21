@@ -1,14 +1,19 @@
 class Player extends Entity
+    name: "player"
     fireFade: 0
     speed: 1.5
     dir = direction.NONE
     constructor: (@x, @y, @w, @h) ->
+        Events.bind "keypressed.FIRE", => @fire()
+        Events.bind "player.tick", =>
+            @move() if @dir != direction.NONE
+            @fireFade-- if @fireFade > 0
+
 
     tick: (input) ->
         @setDirection input
-        @move() if @dir != direction.NONE
-        @fire() if input.pressed input.FIRE
-        @fireFade-- if @fireFade > 0
+        #@fire() if input.pressed input.FIRE
+        super
 
     render: (ctx) ->
         [Art.player, Art.player_red][@fireFade > `0 ? 1: 0`].draw ctx, ~~@x, @y, 7

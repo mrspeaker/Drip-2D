@@ -8,6 +8,7 @@ direction = {
 };
 Entity = (function() {
   function Entity() {}
+  Entity.prototype.name = "entity";
   Entity.prototype.x = 0;
   Entity.prototype.y = 0;
   Entity.prototype.w = 10;
@@ -17,8 +18,11 @@ Entity = (function() {
   Entity.prototype.removed = false;
   Entity.prototype.init = function(level) {
     this.level = level;
+    return Events.trigger(this.name + ".create", {});
   };
-  Entity.prototype.tick = function() {};
+  Entity.prototype.tick = function() {
+    return Events.trigger(this.name + ".tick", {});
+  };
   Entity.prototype.render = function(ctx) {};
   Entity.prototype.remove = function() {
     return this.removed = true;

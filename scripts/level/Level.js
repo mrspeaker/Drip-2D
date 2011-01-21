@@ -1,4 +1,5 @@
 var Level;
+var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 Level = (function() {
   function Level(screen, width, height, spawnX, spawnY) {
     var i, _ref;
@@ -7,10 +8,24 @@ Level = (function() {
     this.height = height;
     this.entities = [];
     this.newEntities = [];
-    this.add(new Player(spawnX, spawnY, 20, 20));
+    this.classes = {
+      "player": Player,
+      "baddie": Baddie
+    };
+    Events.bind("player.create", function(data) {
+      return console.log("Player created");
+    });
+    Events.bind("entity.make", __bind(function(data) {
+      var b, entityClass;
+      entityClass = this.classes[data[0]];
+      b = new entityClass(data[1], data[2], 20, 20, data[3]);
+      return this.add(b);
+    }, this));
+    Events.trigger("entity.make", ["player", spawnX, spawnY, null]);
+    Events.trigger("entity.make", ["player", spawnX + 20, spawnY, null]);
     this.baddieCount = 5;
     for (i = 0, _ref = this.baddieCount - 1; (0 <= _ref ? i <= _ref : i >= _ref); (0 <= _ref ? i += 1 : i -= 1)) {
-      this.add(new Baddie(20 * i, 10, 20, 20, i % 2));
+      Events.trigger("entity.make", ["baddie", 20 * i, 10, i % 2]);
     }
   }
   Level.prototype.tick = function(input) {

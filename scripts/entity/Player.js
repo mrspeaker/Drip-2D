@@ -6,10 +6,11 @@ var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, par
   child.prototype = new ctor;
   child.__super__ = parent.prototype;
   return child;
-};
+}, __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 Player = (function() {
   var dir;
   __extends(Player, Entity);
+  Player.prototype.name = "player";
   Player.prototype.fireFade = 0;
   Player.prototype.speed = 1.5;
   dir = direction.NONE;
@@ -18,18 +19,21 @@ Player = (function() {
     this.y = y;
     this.w = w;
     this.h = h;
+    Events.bind("keypressed.FIRE", __bind(function() {
+      return this.fire();
+    }, this));
+    Events.bind("player.tick", __bind(function() {
+      if (this.dir !== direction.NONE) {
+        this.move();
+      }
+      if (this.fireFade > 0) {
+        return this.fireFade--;
+      }
+    }, this));
   }
   Player.prototype.tick = function(input) {
     this.setDirection(input);
-    if (this.dir !== direction.NONE) {
-      this.move();
-    }
-    if (input.pressed(input.FIRE)) {
-      this.fire();
-    }
-    if (this.fireFade > 0) {
-      return this.fireFade--;
-    }
+    return Player.__super__.tick.apply(this, arguments);
   };
   Player.prototype.render = function(ctx) {
     return [Art.player, Art.player_red][this.fireFade > 0 ? 1: 0].draw(ctx, ~~this.x, this.y, 7);

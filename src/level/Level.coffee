@@ -4,11 +4,25 @@ class Level
         @entities = []
         @newEntities = []
 
+        @classes =
+            "player": Player,
+            "baddie": Baddie
+            
+        Events.bind "player.create", (data) -> console.log "Player created"
+        Events.bind "entity.make", (data) =>
+            entityClass = @classes[data[0]]
+            b = new entityClass data[1], data[2], 20, 20, data[3]
+            @add b
+
         # TODO: abstract level to seperate file
-        @add new Player spawnX, spawnY, 20, 20
+
+        #@add new Player spawnX, spawnY, 20, 20
+        Events.trigger "entity.make", ["player", spawnX, spawnY, null]
+        Events.trigger "entity.make", ["player", spawnX + 20, spawnY, null]
         @baddieCount = 5
         for i in [0..@baddieCount - 1]
-            @add new Baddie 20 * i, 10, 20, 20, i % 2
+            Events.trigger "entity.make", ["baddie", 20 * i, 10, i % 2]
+            #@add new Baddie 20 * i, 10, 20, 20, i % 2
 
     tick: (input) ->
         # process all entities

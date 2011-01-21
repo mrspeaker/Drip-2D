@@ -4,7 +4,7 @@ by [Mr Speaker](http://www.mrspeaker.net/)
 (code structure and bits of code liberally borrowed from MetaGun)
 
 (The start of) An extremely simple skeleton to base 2D games. It's
-all in CoffeeScript - check the src directory
+all in CoffeeScript - check the src directory.
 
 To run: *open index.html*
 

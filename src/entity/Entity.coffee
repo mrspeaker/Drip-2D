@@ -6,6 +6,7 @@ direction =
     RIGHT: 3
 
 class Entity
+    name: "entity"
     x: 0
     y: 0
     w: 10
@@ -14,7 +15,7 @@ class Entity
     frame: 0
     removed: false
 
-    init: (@level) ->
-    tick: ->
+    init: (@level) -> Events.trigger @name + ".create", {}
+    tick: -> Events.trigger @name + ".tick", {}
     render: (ctx) ->
     remove: -> @removed = true

@@ -1,4 +1,5 @@
 class Bullet extends Entity
+    name: "bullet"
     constructor: (@x, @y, @xSpeed, @ySpeed) ->
         @w = 1
         @h = 5
@@ -6,6 +7,7 @@ class Bullet extends Entity
     tick: ->
         @move()
         @collisions()
+        super
 
     render: (ctx) ->
         ctx.fillStyle = "#0ff"

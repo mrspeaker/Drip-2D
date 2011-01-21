@@ -9,6 +9,7 @@ var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, par
 };
 Bullet = (function() {
   __extends(Bullet, Entity);
+  Bullet.prototype.name = "bullet";
   function Bullet(x, y, xSpeed, ySpeed) {
     this.x = x;
     this.y = y;
@@ -19,7 +20,8 @@ Bullet = (function() {
   }
   Bullet.prototype.tick = function() {
     this.move();
-    return this.collisions();
+    this.collisions();
+    return Bullet.__super__.tick.apply(this, arguments);
   };
   Bullet.prototype.render = function(ctx) {
     ctx.fillStyle = "#0ff";

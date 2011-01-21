@@ -8,7 +8,6 @@ main =
     init: -> 
         console.log "game init"
         @ctx = document.getElementById("screen").getContext "2d";
-        
         @bindKeys()
         @reset()
         @run()
@@ -25,6 +24,7 @@ main =
 
     run: ->
         if not @running then return
+        Events.trigger "keypressed.FIRE", {} if @input.pressed @input.FIRE
         @screen.tick @input
         @input.tick()
         @screen.render @ctx

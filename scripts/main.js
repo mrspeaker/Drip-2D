@@ -29,6 +29,9 @@ main = {
     if (!this.running) {
       return;
     }
+    if (this.input.pressed(this.input.FIRE)) {
+      Events.trigger("keypressed.FIRE", {});
+    }
     this.screen.tick(this.input);
     this.input.tick();
     this.screen.render(this.ctx);

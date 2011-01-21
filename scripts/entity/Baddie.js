@@ -9,24 +9,26 @@ var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, par
 };
 Baddie = (function() {
   __extends(Baddie, Entity);
+  Baddie.prototype.name = "baddie";
   Baddie.prototype.frame = 0;
   Baddie.prototype.speed = 20;
-  function Baddie(x, y, w, h, type) {
+  function Baddie(x, y, w, h, art) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
-    this.type = type;
+    this.art = art;
   }
   Baddie.prototype.tick = function() {
     this.move();
     if ((Math.random() * 1000) < 2) {
-      return this.fire();
+      this.fire();
     }
+    return Baddie.__super__.tick.apply(this, arguments);
   };
   Baddie.prototype.render = function(ctx) {
     var art, frame;
-    art = this.type === 0 ? Art.baddie : Art.baddie2;
+    art = this.art === 0 ? Art.baddie : Art.baddie2;
     frame = ~~(++this.frame / this.speed) % 2 === 0 ? 6 : 7;
     return art.draw(ctx, this.x, this.y, frame);
   };
